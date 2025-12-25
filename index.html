@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Mandal Meat — Chouriço, enchidos e carnes. Encomendas com pagamento M-Pesa, e-Mola, mKesh ou na entrega." />
+  <meta name="theme-color" content="#7a1421" />
+  <title>Mandal Meat — Catálogo & Encomendas</title>
+
+  <style>
+    :root{
+      --bg:#fff7f2;
+      --bg2:#fff1ea;
+      --card:#ffffff;
+      --line:#ead6cf;
+      --text:#111827;
+      --muted:#6b7280;
+      --brand:#b91c1c;
+      --brand2:#7a1421;
+      --ok:#16a34a;
+      --shadow:0 14px 45px rgba(16,24,40,.10);
+      --shadow2:0 10px 28px rgba(16,24,40,.08);
+      --radius:18px;
+      --max:1200px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:
+        radial-gradient(900px 500px at 15% -10%, rgba(185,28,28,.10), transparent 60%),
+        radial-gradient(900px 500px at 90% 0%, rgba(122,20,33,.10), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(var(--max), calc(100% - 32px)); margin:0 auto}
+
+    header{
+      position:sticky; top:0; z-index:50;
+      background: rgba(255,247,242,.88);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .headRow{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding: 12px 0;
+    }
+    .brandBox{display:flex; align-items:center; gap:12px; min-width: 260px}
+    .logoImg{
+      width:54px;height:54px;border-radius:16px;
+      background:#fff;border:1px solid var(--line);
+      box-shadow:var(--shadow2);
+      object-fit:contain;padding:6px;
+    }
+    .brandText h1{margin:0; font-size: 15px}
+    .brandText small{display:block;margin-top:3px;color:var(--muted);font-weight:800;font-size:12px}
+
+    .cartBtn{
+      display:flex; align-items:center; gap:10px;
+      padding:10px 12px;border-radius:999px;
+      border:1px solid rgba(185,28,28,.30);
+      background: rgba(185,28,28,.10);
+      cursor:pointer;
+      font-weight:1100;
+      color: #7a1421;
+      white-space:nowrap;
+    }
+    .badge{
+      background: linear-gradient(135deg, var(--brand), #ef4444);
+      color:#fff;font-weight:1100;font-size:12px;
+      padding:3px 9px;border-radius:999px;
+      box-shadow:0 10px 22px rgba(185,28,28,.18);
+    }
+
+    .hero{padding: 22px 0 12px}
+    .heroCard{
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(900px 400px at 35% 15%, rgba(185,28,28,.10), transparent 60%),
+        linear-gradient(180deg, #ffffff, rgba(255,255,255,.92));
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .heroTitle{
+      margin:0 0 8px;
+      font-size: clamp(22px, 3vw, 36px);
+      line-height:1.08;
+    }
+    .heroDesc{margin:0;color:#4b5563;font-weight:700;line-height:1.55}
+
+    .section{padding: 12px 0 28px}
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:12px; flex-wrap:wrap;
+      margin: 10px 0 12px;
+    }
+    .sectionHead h2{margin:0; font-size: 18px}
+    .sub{color:#6b7280; font-weight:800; font-size:13px; margin-top:6px}
+
+    .controls{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .input, select{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding: 11px 12px;
+      font-weight:900;
+      outline:none;
+      min-width: 240px;
+      box-shadow: 0 10px 20px rgba(16,24,40,.04);
+    }
+    select{min-width: 190px}
+    .input:focus, select:focus{border-color:#d9b7ad}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .card{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.95);
+      box-shadow: var(--shadow2);
+      padding: 14px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .topLine{display:flex; align-items:flex-start; justify-content:space-between; gap:10px}
+    .name{margin:0; font-size:14px; font-weight:1100; line-height:1.2}
+    .meta{margin-top:5px; color:#6b7280; font-weight:950; font-size:12px}
+    .price{font-weight:1100; font-size:15px; white-space:nowrap; text-align:right}
+    .price small{display:block; color:#6b7280; font-weight:950; font-size:12px; margin-top:3px}
+    .row2{display:flex; gap:10px; align-items:center; justify-content:space-between; margin-top:auto}
+    .qty{
+      display:flex; align-items:center; gap:8px;
+      border:1px solid var(--line);
+      border-radius: 14px;
+      padding:6px 8px;
+      background:#fff;
+    }
+    .qty button{
+      width:30px;height:30px;border-radius:12px;
+      border:1px solid var(--line);
+      background:#fff;
+      font-weight:1100;
+      cursor:pointer;
+    }
+    .qty button:hover{background:#fff7f2}
+    .qty input{width:42px;text-align:center;border:0;outline:none;background:transparent;font-weight:1100}
+    .add{
+      flex:1;
+      border:1px solid rgba(185,28,28,.30);
+      background: rgba(185,28,28,.08);
+      color: #7a1421;
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor:pointer;
+      font-weight:1100;
+    }
+    .add:hover{filter:brightness(1.03)}
+
+    /* Drawer + overlays */
+    .overlay{
+      position:fixed; inset:0;
+      background: rgba(17,24,39,.45);
+      display:none;
+      z-index:80;
+    }
+    .overlay.show{display:block}
+
+    .drawer{
+      position:fixed; top:0; right:0; height:100%;
+      width:min(560px, 96vw);
+      background:#fff;
+      border-left: 1px solid var(--line);
+      box-shadow: -20px 0 70px rgba(16,24,40,.18);
+      transform: translateX(110%);
+      transition: transform .25s ease;
+      z-index:90;
+      display:flex; flex-direction:column;
+    }
+    .drawer.open{transform: translateX(0)}
+    .dHead{
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--line);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .dHead h3{margin:0; font-size:16px}
+    .x{
+      width:40px;height:40px;border-radius:14px;
+      border:1px solid var(--line);
+      background:#fff;
+      cursor:pointer;
+      font-weight:1100;
+    }
+    .x:hover{background:#fff7f2}
+
+    /* ✅ Carrinho = só produtos */
+    .dBody{padding: 12px 14px; overflow:auto; flex:1; display:grid; gap:10px}
+    .cartItem{
+      border:1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background:#fff;
+      box-shadow: 0 10px 20px rgba(16,24,40,.05);
+      display:grid;
+      gap: 10px;
+    }
+    .cartTop{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+    .cartTitle{display:grid;gap:4px;min-width:0}
+    .cartTitle b{font-size:14px;font-weight:1200;line-height:1.25;word-break:break-word}
+    .cartTitle small{font-size:13px;font-weight:1000;color:#6b7280;line-height:1.35}
+    .cartPrice{text-align:right;white-space:nowrap;display:grid;gap:4px}
+    .cartPrice .subtotal{font-size:14px;font-weight:1200}
+    .cartPrice .unit{font-size:12px;font-weight:1000;color:#6b7280}
+    .cartBottom{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+    .qControl{
+      display:flex; align-items:center; gap: 8px;
+      padding: 6px 8px;border-radius: 16px;
+      border:1px solid var(--line); background:#fff;
+    }
+    .qControl button{
+      width:34px;height:34px;border-radius:14px;
+      border:1px solid var(--line);
+      background:#fff;cursor:pointer;font-weight:1200;
+    }
+    .qControl button:hover{background:#fff7f2}
+    .qValue{width:48px;text-align:center;font-weight:1200;font-size:14px;border:0;outline:none;background:transparent}
+
+    .smallBtn{
+      border:1px solid var(--line);
+      background:#fff;
+      padding: 10px 12px;
+      border-radius: 14px;
+      cursor:pointer;
+      font-weight:1100;
+      font-size:13px;
+    }
+    .smallBtn:hover{background:#fff7f2}
+    .danger{
+      border-color: rgba(239,68,68,.35);
+      background: rgba(239,68,68,.08);
+      color:#7f1d1d;
+    }
+
+    /* ✅ Rodapé do carrinho (total + botões) */
+    .dFoot{
+      border-top: 1px solid var(--line);
+      padding: 12px 14px 14px;
+      display:grid;
+      gap: 10px;
+      background: #fff;
+    }
+    .totals{display:flex; justify-content:space-between; align-items:center; font-weight:1200}
+    .totals .muted{color:#6b7280; font-weight:1050}
+
+    .btnRow{display:grid; gap:10px}
+    .go{
+      width:100%;
+      padding: 12px 14px;
+      border:0;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand2), var(--brand));
+      color:#fff;
+      font-weight:1200;
+      cursor:pointer;
+      box-shadow: 0 16px 34px rgba(185,28,28,.18);
+    }
+    .go:hover{filter:brightness(1.02)}
+    .go:disabled{opacity:.55; cursor:not-allowed; box-shadow:none}
+
+    /* ✅ MODAL Finalizar (separado do carrinho) */
+    .modal{
+      position:fixed; inset:0;
+      display:none;
+      z-index:120;
+      align-items:center;
+      justify-content:center;
+      padding: 14px;
+    }
+    .modal.show{display:flex}
+    .modalCard{
+      width:min(720px, 96vw);
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 30px 90px rgba(16,24,40,.25);
+      overflow:hidden;
+    }
+    .mHead{
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--line);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      background: rgba(255,247,242,.75);
+    }
+    .mHead h3{margin:0; font-size:16px}
+    .mBody{padding: 14px; display:grid; gap:10px}
+    .two{display:grid; grid-template-columns: 1fr 1fr; gap:10px}
+    .payRow{display:flex; gap:8px; flex-wrap:wrap}
+    .radio{
+      display:flex; align-items:center; gap:8px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      padding: 9px 10px;
+      background:#fff;
+      cursor:pointer;
+      user-select:none;
+      font-weight:1100;
+      font-size:12px;
+    }
+    .radio input{accent-color: var(--brand)}
+    .note{color:#6b7280;font-weight:850;font-size:13px;line-height:1.5}
+
+    /* Toast */
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: #111827;
+      color: #fff;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 1100;
+      font-size: 13px;
+      box-shadow: 0 18px 40px rgba(0,0,0,.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+      z-index: 9999;
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    @media (max-width: 1000px){
+      .grid{grid-template-columns: repeat(2, 1fr)}
+      .brandBox{min-width:auto}
+    }
+    @media (max-width: 620px){
+      .grid{grid-template-columns:1fr}
+      .input{min-width:100%}
+      .two{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="headRow">
+      <div class="brandBox">
+        <img class="logoImg" src="logo.png" alt="Logo Mandal Meat" />
+        <div class="brandText">
+          <h1>Mandal Meat</h1>
+          <small>Chouriço • Enchidos • Carnes — Entrega em Maputo</small>
+        </div>
+      </div>
+
+      <button id="openCart" class="cartBtn" type="button">
+        🛒 Carrinho <span id="cartCount" class="badge">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="heroCard">
+        <h2 class="heroTitle">Catálogo & Encomendas</h2>
+        <p class="heroDesc">
+          Adicione produtos ao carrinho e finalize em poucos segundos. Pagamentos: <b>M-Pesa</b>, <b>e-Mola</b>, <b>mKesh</b> ou <b>na entrega</b>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="catalogo">
+    <div class="wrap">
+      <div class="sectionHead">
+        <div>
+          <h2>Catálogo</h2>
+          <div class="sub">Itens “Sob consulta” são confirmados por WhatsApp.</div>
+        </div>
+
+        <div class="controls" aria-label="Filtros">
+          <input id="search" class="input" type="search" placeholder="Pesquisar (ex: picanha, frango, chouriço)..." />
+          <select id="category">
+            <option value="todos">Todas as categorias</option>
+            <option value="vaca">Vaca</option>
+            <option value="carneiro">Carneiro</option>
+            <option value="aves">Aves</option>
+            <option value="enchidos">Enchidos</option>
+            <option value="consulta">Sob consulta</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="grid" class="grid"></div>
+    </div>
+  </section>
+</main>
+
+<!-- DRAWER: CARRINHO (só produtos) -->
+<div id="overlay" class="overlay" aria-hidden="true"></div>
+<aside id="drawer" class="drawer" aria-label="Carrinho">
+  <div class="dHead">
+    <h3>🛒 Carrinho</h3>
+    <button class="x" id="closeCart" type="button" aria-label="Fechar">✕</button>
+  </div>
+
+  <div class="dBody" id="cartItems"></div>
+
+  <div class="dFoot">
+    <div class="totals">
+      <div class="muted">Total</div>
+      <div id="total">0 MZN</div>
+    </div>
+
+    <div class="btnRow">
+      <button id="btnCheckout" class="go" type="button" disabled>Finalizar encomenda</button>
+      <button id="clearCart" class="smallBtn danger" type="button">Limpar carrinho</button>
+      <button id="continue" class="smallBtn" type="button">Continuar a comprar</button>
+    </div>
+  </div>
+</aside>
+
+<!-- MODAL: FINALIZAR (separado) -->
+<div id="checkoutModal" class="modal" aria-hidden="true">
+  <div class="modalCard" role="dialog" aria-modal="true" aria-label="Finalizar encomenda">
+    <div class="mHead">
+      <h3>Finalizar encomenda</h3>
+      <button class="x" id="closeCheckout" type="button" aria-label="Fechar">✕</button>
+    </div>
+
+    <div class="mBody">
+      <div class="two">
+        <input id="custName" class="input" placeholder="Seu nome" />
+        <input id="custPhone" class="input" placeholder="Telefone (ex: 84xxxxxxx)" />
+      </div>
+
+      <input id="custAddress" class="input" placeholder="Local de entrega (bairro/rua/referência)" />
+      <input id="custNotes" class="input" placeholder="Notas (opcional: horário, corte, etc.)" />
+
+      <div class="payRow" role="radiogroup" aria-label="Método de pagamento">
+        <label class="radio"><input type="radio" name="pay" value="M-Pesa" checked /> M-Pesa</label>
+        <label class="radio"><input type="radio" name="pay" value="e-Mola" /> e-Mola</label>
+        <label class="radio"><input type="radio" name="pay" value="mKesh" /> mKesh</label>
+        <label class="radio"><input type="radio" name="pay" value="Na entrega" /> Na entrega</label>
+      </div>
+
+      <div class="note" id="payHint">
+        Para pagamento móvel, após enviar a encomenda confirmamos beneficiário e valor final.
+      </div>
+
+      <button id="placeOrder" class="go" type="button" disabled>Enviar encomenda por WhatsApp</button>
+
+     
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast" aria-live="polite"></div>
+
+<script>
+  // ===== CONFIG WhatsApp =====
+  const WHATSAPP_NUMBERS = ["258873393333", "258849595955"];
+  const DEFAULT_WHATSAPP = WHATSAPP_NUMBERS[0];
+
+  // ===== Produtos =====
+  const PRODUCTS = [
+    { id:"picanha", name:"Peça Picanha", category:"vaca", unit:"kg", price:1200 },
+    { id:"alcatra", name:"Peça Alcatra (Completa)", category:"vaca", unit:"kg", price:900 },
+    { id:"filet", name:"Peça Filet Mignon", category:"vaca", unit:"kg", price:1600 },
+    { id:"bife_prego", name:"Bife Prego", category:"vaca", unit:"kg", price:700 },
+    { id:"topside", name:"Bife Top Side / Ganso", category:"vaca", unit:"kg", price:750 },
+    { id:"guisado_sem_ossos", name:"Guisado (sem ossos)", category:"vaca", unit:"kg", price:700 },
+    { id:"guisado_vaca", name:"Guisado Vaca", category:"vaca", unit:"kg", price:500 },
+    { id:"lombo_vaca", name:"Lombo de Vaca", category:"vaca", unit:"kg", price:850 },
+    { id:"tomahawk", name:"Tomahawk", category:"vaca", unit:"kg", price:950 },
+    { id:"tbone_filet", name:"T-Bone Filet", category:"vaca", unit:"kg", price:850 },
+    { id:"tbone_simples", name:"T-Bone Simples", category:"vaca", unit:"kg", price:700 },
+    { id:"beef_ribs", name:"Beef Ribs", category:"vaca", unit:"kg", price:800 },
+    { id:"chuck", name:"Chuck", category:"vaca", unit:"kg", price:750 },
+    { id:"rabada", name:"Rabada", category:"vaca", unit:"kg", price:900 },
+
+    { id:"lamb_chops", name:"Lamb Chops (Carneiro)", category:"carneiro", unit:"kg", price:850 },
+    { id:"loin_chops", name:"Loin Chops (Carneiro)", category:"carneiro", unit:"kg", price:900 },
+
+    { id:"coxas_5kg", name:"Coxas de Frango (5kg)", category:"aves", unit:"pack", price:1900 },
+    { id:"asinhas_5kg", name:"Asinhas de Frango (5kg)", category:"aves", unit:"pack", price:1950 },
+    { id:"peito_frango", name:"Peito de Frango", category:"aves", unit:"kg", price:450 },
+    { id:"burger_panada", name:"Burger Galinha Panada", category:"aves", unit:"kg", price:550 },
+
+    { id:"chourico_fumado", name:"Chouriço Fumado de Vaca", category:"enchidos", unit:"kg", price:1100 },
+    { id:"salsichas_queijo_500g", name:"Salsichas Queijo (500g)", category:"enchidos", unit:"pack", price:500 },
+    { id:"rachel_fumado", name:"Rachel Fumado", category:"enchidos", unit:"kg", price:400 },
+    { id:"vorse_vaca", name:"Vorse de Vaca", category:"enchidos", unit:"kg", price:450 },
+    { id:"babalaza", name:"Babalaza", category:"enchidos", unit:"kg", price:600 },
+    { id:"fiambre_galinha", name:"Fiambre de Galinha", category:"enchidos", unit:"kg", price:800 },
+
+    { id:"caixa_ovos", name:"Caixa de Ovos", category:"consulta", unit:"unit", price:null },
+    { id:"caixa_galinha", name:"Caixa de Galinha", category:"consulta", unit:"unit", price:null }
+  ];
+
+  // ===== State =====
+  const LS_KEY = "mandal_meat_cart_v3";
+  let cart = loadCart();
+
+  // ===== Helpers =====
+  function money(n){
+    if(n === null || n === undefined) return "Sob consulta";
+    return `${Number(n).toLocaleString("pt-PT")} MZN`;
+  }
+  function unitLabel(p){
+    if(p.unit === "kg") return "kg";
+    if(p.unit === "pack") return "pacote";
+    return "un.";
+  }
+  function saveCart(){ localStorage.setItem(LS_KEY, JSON.stringify(cart)); }
+  function loadCart(){
+    try{
+      const raw = localStorage.getItem(LS_KEY);
+      return raw ? JSON.parse(raw) : {};
+    }catch{ return {}; }
+  }
+  function cartCount(){
+    return Object.values(cart).reduce((a,b)=>a + (b.qty||0), 0);
+  }
+  function cartTotal(){
+    let t = 0;
+    for(const [id, it] of Object.entries(cart)){
+      const p = PRODUCTS.find(x=>x.id===id);
+      if(!p || p.price == null) continue;
+      t += p.price * (it.qty||0);
+    }
+    return t;
+  }
+  function genRef(){
+    const d = new Date();
+    const pad = (x)=> String(x).padStart(2,"0");
+    const stamp = `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}-${pad(d.getHours())}${pad(d.getMinutes())}`;
+    const rand = Math.random().toString(16).slice(2,6).toUpperCase();
+    return `MM-${stamp}-${rand}`;
+  }
+  function hasItems(){ return Object.keys(cart).length > 0; }
+
+  // ===== UI refs =====
+  const grid = document.getElementById("grid");
+  const search = document.getElementById("search");
+  const category = document.getElementById("category");
+  const cartCountEl = document.getElementById("cartCount");
+  const cartItems = document.getElementById("cartItems");
+  const totalEl = document.getElementById("total");
+
+  const overlay = document.getElementById("overlay");
+  const drawer = document.getElementById("drawer");
+
+  const checkoutModal = document.getElementById("checkoutModal");
+  const custName = document.getElementById("custName");
+  const custPhone = document.getElementById("custPhone");
+  const custAddress = document.getElementById("custAddress");
+  const custNotes = document.getElementById("custNotes");
+  const placeOrder = document.getElementById("placeOrder");
+  const payHint = document.getElementById("payHint");
+  const btnCheckout = document.getElementById("btnCheckout");
+
+  // ===== Toast =====
+  const toast = document.getElementById("toast");
+  let toastTimer = null;
+  function showToast(text){
+    toast.textContent = text;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=> toast.classList.remove("show"), 1600);
+  }
+
+  // ===== Drawer open/close =====
+  function openDrawer(){
+    overlay.classList.add("show");
+    drawer.classList.add("open");
+    overlay.setAttribute("aria-hidden","false");
+  }
+  function closeDrawer(){
+    overlay.classList.remove("show");
+    drawer.classList.remove("open");
+    overlay.setAttribute("aria-hidden","true");
+  }
+  document.getElementById("openCart").addEventListener("click", openDrawer);
+  document.getElementById("closeCart").addEventListener("click", closeDrawer);
+  overlay.addEventListener("click", ()=> {
+    // se modal aberto, não fechar por overlay (evita confusão)
+    if(checkoutModal.classList.contains("show")) return;
+    closeDrawer();
+  });
+
+  // ===== Modal open/close =====
+  function openCheckout(){
+    if(!hasItems()) return;
+    checkoutModal.classList.add("show");
+    checkoutModal.setAttribute("aria-hidden","false");
+  }
+  function closeCheckout(){
+    checkoutModal.classList.remove("show");
+    checkoutModal.setAttribute("aria-hidden","true");
+  }
+  document.getElementById("closeCheckout").addEventListener("click", closeCheckout);
+  checkoutModal.addEventListener("click", (e)=>{
+    if(e.target === checkoutModal) closeCheckout();
+  });
+
+  // ===== Render products =====
+  function renderProducts(){
+    const q = (search.value||"").trim().toLowerCase();
+    const cat = category.value;
+
+    const list = PRODUCTS.filter(p=>{
+      const matchText = p.name.toLowerCase().includes(q);
+      const matchCat = (cat === "todos") ? true : (p.category === cat);
+      return matchText && matchCat;
+    });
+
+    grid.innerHTML = list.map(p=>{
+      const isConsulta = (p.price == null);
+      return `
+        <article class="card">
+          <div class="topLine">
+            <div>
+              <p class="name">${p.name}</p>
+              <div class="meta">${p.category.toUpperCase()}</div>
+            </div>
+            <div class="price">
+              ${isConsulta ? "Sob consulta" : money(p.price)}
+              ${isConsulta ? "" : `<small>por ${unitLabel(p)}</small>`}
+            </div>
+          </div>
+
+          <div class="row2">
+            <div class="qty">
+              <button type="button" onclick="decQty('${p.id}')">−</button>
+              <input id="qty_${p.id}" inputmode="numeric" value="1" />
+              <button type="button" onclick="incQty('${p.id}')">+</button>
+            </div>
+            <button class="add" type="button" onclick="addToCart('${p.id}')">+ Adicionar</button>
+          </div>
+        </article>
+      `;
+    }).join("");
+  }
+
+  // ===== Render cart (só produtos) =====
+  function renderCart(){
+    cartCountEl.textContent = cartCount();
+    btnCheckout.disabled = !hasItems();
+
+    const entries = Object.entries(cart);
+
+    if(entries.length === 0){
+      cartItems.innerHTML = `<div class="note">O seu carrinho está vazio. Adicione produtos no catálogo.</div>`;
+    } else {
+      cartItems.innerHTML = entries.map(([id, it])=>{
+        const p = PRODUCTS.find(x=>x.id===id);
+        if(!p) return "";
+        const qty = Math.max(1, parseInt(it.qty,10)||1);
+
+        const unitText = (p.price == null)
+          ? "Preço: Sob consulta"
+          : `Unitário: ${money(p.price)} / ${unitLabel(p)}`;
+
+        const subtotalText = (p.price == null)
+          ? "Sob consulta"
+          : money(p.price * qty);
+
+        return `
+          <div class="cartItem">
+            <div class="cartTop">
+              <div class="cartTitle">
+                <b>${p.name}</b>
+                <small>${p.category.toUpperCase()} • ${unitText}</small>
+              </div>
+              <div class="cartPrice">
+                <div class="subtotal">${subtotalText}</div>
+                <div class="unit">Qtd: ${qty}</div>
+              </div>
+            </div>
+
+            <div class="cartBottom">
+              <div class="qControl">
+                <button type="button" aria-label="Diminuir" onclick="setCartQty('${id}', ${qty-1})">−</button>
+                <input class="qValue" value="${qty}" readonly />
+                <button type="button" aria-label="Aumentar" onclick="setCartQty('${id}', ${qty+1})">+</button>
+              </div>
+
+              <button class="smallBtn danger" type="button" onclick="removeFromCart('${id}')">Remover</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    totalEl.textContent = money(cartTotal());
+    validateCheckout();
+  }
+
+  // ===== Actions (catálogo) =====
+  window.incQty = function(id){
+    const el = document.getElementById("qty_"+id);
+    el.value = Math.min(999, (parseInt(el.value||"1",10)||1) + 1);
+  }
+  window.decQty = function(id){
+    const el = document.getElementById("qty_"+id);
+    el.value = Math.max(1, (parseInt(el.value||"1",10)||1) - 1);
+  }
+
+  // ✅ Adicionar sem abrir carrinho
+  window.addToCart = function(id){
+    const el = document.getElementById("qty_"+id);
+    const qty = Math.max(1, parseInt(el?.value||"1",10)||1);
+
+    cart[id] = cart[id] || { qty:0 };
+    cart[id].qty += qty;
+
+    saveCart();
+    renderCart();
+    showToast("✅ Produto adicionado ao carrinho");
+  }
+
+  // ===== Actions (carrinho) =====
+  window.setCartQty = function(id, qty){
+    qty = parseInt(qty,10)||0;
+    if(qty <= 0){
+      delete cart[id];
+    } else {
+      cart[id] = { qty };
+    }
+    saveCart();
+    renderCart();
+  }
+
+  window.removeFromCart = function(id){
+    delete cart[id];
+    saveCart();
+    renderCart();
+  }
+
+  document.getElementById("clearCart").addEventListener("click", ()=>{
+    cart = {};
+    saveCart();
+    renderCart();
+    showToast("Carrinho limpo");
+  });
+
+  document.getElementById("continue").addEventListener("click", ()=>{
+    closeDrawer();
+  });
+
+  // ✅ botão “Finalizar encomenda” abre MODAL separado
+  btnCheckout.addEventListener("click", ()=>{
+    openCheckout();
+  });
+
+  // ===== Checkout =====
+  function selectedPay(){
+    return document.querySelector('input[name="pay"]:checked')?.value || "M-Pesa";
+  }
+
+  function validateCheckout(){
+    const ok = hasItems() &&
+      (custName.value.trim().length >= 2) &&
+      (custPhone.value.trim().length >= 7) &&
+      (custAddress.value.trim().length >= 5);
+
+    placeOrder.disabled = !ok;
+  }
+
+  [custName, custPhone, custAddress, custNotes].forEach(el=>{
+    el.addEventListener("input", validateCheckout);
+  });
+
+  document.querySelectorAll('input[name="pay"]').forEach(r=>{
+    r.addEventListener("change", ()=>{
+      const method = selectedPay();
+      payHint.textContent = (method === "Na entrega")
+        ? "Pagamento no acto de entrega. Confirmamos disponibilidade e horário."
+        : `Pagamento por ${method}: após enviar a encomenda, confirmamos beneficiário e valor final.`;
+    });
+  });
+
+  document.getElementById("placeOrder").addEventListener("click", ()=>{
+    const ref = genRef();
+    const lines = [];
+    let total = 0;
+    let hasConsulta = false;
+
+    for(const [id, it] of Object.entries(cart)){
+      const p = PRODUCTS.find(x=>x.id===id);
+      if(!p) continue;
+      const qty = Math.max(1, parseInt(it.qty,10)||1);
+
+      if(p.price == null){
+        hasConsulta = true;
+        lines.push(`• ${p.name} — Qtd: ${qty} — PREÇO: SOB CONSULTA`);
+      } else {
+        const line = p.price * qty;
+        total += line;
+        lines.push(`• ${p.name} — Qtd: ${qty} — ${money(line)} (unitário: ${money(p.price)} / ${unitLabel(p)})`);
+      }
+    }
+
+    const msg =
+`Olá Mandal Meat 👋
+Quero fazer uma encomenda.
+
+REF: ${ref}
+
+DADOS DO CLIENTE
+- Nome: ${custName.value.trim()}
+- Telefone: ${custPhone.value.trim()}
+- Entrega: ${custAddress.value.trim()}
+- Notas: ${custNotes.value.trim() || "-"}
+
+PRODUTOS
+${lines.join("\n")}
+
+TOTAL (itens com preço fixo): ${money(total)}
+${hasConsulta ? "⚠️ Inclui itens SOB CONSULTA (confirmar preço)." : ""}
+
+PAGAMENTO: ${selectedPay()}
+
+Por favor confirmem disponibilidade e tempo de entrega. Obrigado.`;
+
+    window.open("https://wa.me/" + DEFAULT_WHATSAPP + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
+  });
+
+  // ===== Search / filter =====
+  search.addEventListener("input", renderProducts);
+  category.addEventListener("change", renderProducts);
+
+  // ===== Init =====
+  renderProducts();
+  renderCart();
+  validateCheckout();
+</script>
+
+</body>
+</html>
